@@ -1,8 +1,6 @@
 import Link from '@/components/Link'
-import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
-import NewsletterForm from 'pliny/ui/NewsletterForm'
 
 const MAX_DISPLAY = 6
 
@@ -12,7 +10,7 @@ export default function Home({ posts }) {
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
+            AI Tools Library
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
@@ -20,7 +18,7 @@ export default function Home({ posts }) {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {!posts.length && 'No posts found.'}
+          {!posts.length && 'No tools found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags } = post
             return (
@@ -32,7 +30,7 @@ export default function Home({ posts }) {
                   <div className="space-y-6">
                     <div>
                       <dl>
-                        <dt className="sr-only">Published on</dt>
+                        <dt className="sr-only">Added on</dt>
                         <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                           <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                         </dd>
@@ -45,11 +43,6 @@ export default function Home({ posts }) {
                           {title}
                         </Link>
                       </h2>
-                      <div className="mb-4 flex flex-wrap gap-2">
-                        {tags.map((tag) => (
-                          <Tag key={tag} text={tag} />
-                        ))}
-                      </div>
                     </div>
                     <div className="prose max-w-none line-clamp-3 text-gray-500 dark:text-gray-400">
                       {summary}
@@ -61,7 +54,7 @@ export default function Home({ posts }) {
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                       aria-label={`Read more: "${title}"`}
                     >
-                      Read more &rarr;
+                      View Details &rarr;
                     </Link>
                   </div>
                 </div>
@@ -70,7 +63,7 @@ export default function Home({ posts }) {
           })}
         </div>
       </div>
-
+      
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end pt-8 text-base font-medium leading-6">
           <Link
@@ -78,14 +71,8 @@ export default function Home({ posts }) {
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             aria-label="All posts"
           >
-            All Posts &rarr;
+            All Tools &rarr;
           </Link>
-        </div>
-      )}
-
-      {siteMetadata.newsletter?.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
         </div>
       )}
     </>
